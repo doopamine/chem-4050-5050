@@ -5,17 +5,17 @@ from scipy.constants import k as kB, eV
 
 def partition_function(energies, degeneracies, T):
     # Computes partition function Z for any given values for energies and degeneracies
-    beta = 1 / (kB * T)
+    beta = 1 / (kB * T) # in 1/J
     return np.sum(degeneracies * np.exp(-np.array(energies) * eV * beta))
 
 def thermodynamic_properties(energies, degeneracies, T):
     # Solves variables U (J), F (J), and S (J/K) for given values
-    beta = 1 / (kB * T)
-    Z = partition_function(energies, degeneracies, T)
-    E_exp = np.sum(degeneracies * np.array(energies) * eV * np.exp(-np.array(energies) * eV * beta))
-    U = E_exp / Z
-    F = -kB * T * np.log(Z)
-    S = (U - F) / T
+    beta = 1 / (kB * T) # in 1/J
+    Z = partition_function(energies, degeneracies, T) 
+    E_exp = np.sum(degeneracies * np.array(energies) * eV * np.exp(-np.array(energies) * eV * beta)) 
+    U = E_exp / Z 
+    F = -kB * T * np.log(Z) 
+    S = (U - F) / T 
     return U, F, S
 
 def compute_all_cases(T_range=np.linspace(300, 2000, 100)):
@@ -36,6 +36,7 @@ def compute_all_cases(T_range=np.linspace(300, 2000, 100)):
     energies3 = [0.00, 0.07, 0.12, 0.13, 0.14]
     degeneracies3 = [4, 2, 2, 4, 2]
 
+    # Prepare data storage
     data = {"T": [], "U1": [], "U2": [], "U3": [], "F1": [], "F2": [], "F3": [], "S1": [], "S2": [], "S3": []}
 
     # Calculate properties for each temperature and append data
@@ -88,7 +89,7 @@ def compute_all_cases(T_range=np.linspace(300, 2000, 100)):
 
 # Plot 3: Free Energy (F2 vs Temperature)
     plt.figure(figsize=(8, 5))
-    plt.plot(T_range, np.array(data["F2"]) / eV, lw=2, color="royalblue")
+    plt.plot(T_range, np.array(data["F2"]) / eV, lw=2, color="blue")
     plt.xlabel("Temperature (K)")
     plt.ylabel("Free Energy F₂ (eV)")
     plt.title("Free Energy vs Temperature — Ce³⁺ with Spin-Orbit Coupling")

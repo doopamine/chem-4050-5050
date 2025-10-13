@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from compute_work_isothermal import compute_work_isothermal
 from compute_work_adiabatic import compute_work_adiabatic
 
-# Compute both
+# Using both functions to find work values
 Vf_iso, w_iso = compute_work_isothermal()
 Vf_adi, w_adi = compute_work_adiabatic()
 
-# Plot
+# Plotting isothermal vs adiabatic work
 plt.figure(figsize=(7, 5))
 plt.plot(Vf_iso, w_iso, label="Isothermal", lw=2)
 plt.plot(Vf_adi, w_adi, label="Adiabatic", lw=2)
